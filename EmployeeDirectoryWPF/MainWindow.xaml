@@ -5,19 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmployeeDirectoryWPF"
         mc:Ignorable="d"
-        Title="Emploee folder" Height="560" Width="1000">
+        Title="MainWindow" Height="450" Width="800">
+    
     <Grid x:Name="Root" Background="BlanchedAlmond">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto">                
-            </RowDefinition>            
+            <RowDefinition Height="Auto">
+            </RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45px" Margin="10px">
             <StackPanel.Resources>
-            <Style TargetType="Button">
-                <Setter Property="Margin" Value="7" />
-                    <Setter Property="Padding" Value="7" />                
-                
+                <Style TargetType="Button">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Height" Value="35"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="Black" CornerRadius="5">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <!-- Тригер для зміни градієнту при наведенні -->
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="LightSkyBlue" Offset="0"/>
+                                        <GradientStop Color="DarkBlue" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </StackPanel.Resources>
             <Button Content="Add" />
@@ -31,7 +53,7 @@
             <Separator VerticalAlignment="Bottom" Margin="5"/>
 
 
-
         </StackPanel>
     </Grid>
+    
 </Window>
