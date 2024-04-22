@@ -12,8 +12,9 @@
             <RowDefinition Height="Auto">
             </RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45px" Margin="10px" Grid.ColumnSpan="10">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45px" Grid.ColumnSpan="15">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Padding" Value="15,15"/>
@@ -58,12 +59,11 @@
             <Button Content=" Fire " />
             <Button Content=" Statistics " />
             <Button Content=" Import " />
-            <Button Content=" Export " />
-
-            <Separator VerticalAlignment="Bottom" Margin="5"/>
-
-
+            <Button Content=" Export " />            
         </StackPanel>
+        <Separator VerticalAlignment="Bottom" Margin="-5"/>
+        
+        
     </Grid>
     
 </Window>
