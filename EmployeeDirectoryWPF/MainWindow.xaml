@@ -13,11 +13,21 @@
             </RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45px" Margin="10px">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45px" Margin="10px" Grid.ColumnSpan="10">
             <StackPanel.Resources>
                 <Style TargetType="Button">
+                    <Setter Property="Padding" Value="15,15"/>
                     <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Height" Value="35"/>
+                    <Setter Property="Height" Value="40"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="LightSkyBlue" Offset="0"/>
+                                <GradientStop Color="DarkBlue" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
@@ -27,14 +37,14 @@
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
-                    <!-- Тригер для зміни градієнту при наведенні -->
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
+                            
                             <Setter Property="Background">
                                 <Setter.Value>
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                        <GradientStop Color="LightSkyBlue" Offset="0"/>
-                                        <GradientStop Color="DarkBlue" Offset="1"/>
+                                        <GradientStop Color="DarkBlue" Offset="0"/>
+                                        <GradientStop Color="LightSkyBlue" Offset="1"/>
                                     </LinearGradientBrush>
                                 </Setter.Value>
                             </Setter>
@@ -42,13 +52,13 @@
                     </Style.Triggers>
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Add" />
-            <Button Content="Edit" />
-            <Button Content="Delete All" />
-            <Button Content="Fire" />
-            <Button Content="Statistics" />
-            <Button Content="Import" />
-            <Button Content="Export" />
+            <Button Content=" Add " />
+            <Button Content=" Edit " />
+            <Button Content=" Delete All " />
+            <Button Content=" Fire " />
+            <Button Content=" Statistics " />
+            <Button Content=" Import " />
+            <Button Content=" Export " />
 
             <Separator VerticalAlignment="Bottom" Margin="5"/>
 
