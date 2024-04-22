@@ -6,15 +6,17 @@
         xmlns:local="clr-namespace:EmployeeDirectoryWPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    
+
     <Grid x:Name="Root" Background="BlanchedAlmond">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto">
-            </RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
+
+        <!-- StackPanel з кнопками -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45px" Grid.ColumnSpan="15">
+            <!-- Стилі кнопок -->
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Padding" Value="15,15"/>
@@ -40,7 +42,6 @@
                     </Setter>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            
                             <Setter Property="Background">
                                 <Setter.Value>
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -59,11 +60,40 @@
             <Button Content=" Fire " />
             <Button Content=" Statistics " />
             <Button Content=" Import " />
-            <Button Content=" Export " />            
+            <Button Content=" Export " />
         </StackPanel>
-        <Separator VerticalAlignment="Bottom" Margin="-5"/>
+        <Separator Grid.Row="1" VerticalAlignment="Top" Margin="0"/>
         
-        
+
+        <Grid Grid.Row="2">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="id" FontWeight="Bold" Padding="5" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Text="name" FontWeight="Bold" Padding="5"/>
+            <TextBlock Grid.Column="2" Text="adress" FontWeight="Bold" Padding="5"/>
+            <TextBlock Grid.Column="3" Text="date of birthday" FontWeight="Bold" Padding="5"/>
+            <TextBlock Grid.Column="4" Text="phone" FontWeight="Bold" Padding="5"/>
+            <TextBlock Grid.Column="5" Text="job title" FontWeight="Bold" Padding="5"/>
+            <TextBlock Grid.Column="6" Text="status" FontWeight="Bold" Padding="5"/>
+            <TextBlock Grid.Column="7" Text="salary" FontWeight="Bold" Padding="5"/>
+            <TextBlock Grid.Column="8" Text="date of hiring" FontWeight="Bold" Padding="5"/>
+            <TextBlock Grid.Column="9" Text="date of retirement" FontWeight="Bold" Padding="5"/>
+            
+            <!-- Тут ви можете додати елементи для відображення даних з бази даних -->
+        </Grid>
     </Grid>
-    
+
+
+
 </Window>
