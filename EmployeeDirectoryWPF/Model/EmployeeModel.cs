@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeDirectoryWPF.Model
 {
-    class EmployeeModel
+    public class EmployeeModel
     {
         public int Id { get; set; }
         public required string Name { get; set; }
