@@ -18,7 +18,7 @@ namespace EmployeeDirectoryWPF.ViewModel
     {
         public MainWindow()
         {
-            InitializeComponent();
-        }
+            InitializeComponent();            
+        }        
     }
 }
