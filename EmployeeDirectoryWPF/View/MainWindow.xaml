@@ -66,6 +66,7 @@
         <Grid Grid.Row="2">
 
             <DataGrid ItemsSource="{Binding Employee}" AutoGenerateColumns="True"/>
+            
 
 
             <!--<DataGrid x:Name="Models" AutoGenerateColumns="True">-->
