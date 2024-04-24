@@ -1,5 +1,4 @@
-﻿using EmployeeDirectoryWPF.Model.YourNamespace;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +8,9 @@ namespace EmployeeDirectoryWPF.Model
 {
     internal class ModelAccess
     {
-        public List<Employee> GetAllEmployees ()
-        {
+        //public List<Employee> GetAllEmployees ()
+        //{
 
-        }
+        //}
     }
 }
