@@ -29,7 +29,7 @@ namespace EmployeeDirectoryWPF.ViewModel
 
         private void Increment()
         {
-            Counter++;
+            Counter = Counter + 100;
         }
 
         private void Decrement()

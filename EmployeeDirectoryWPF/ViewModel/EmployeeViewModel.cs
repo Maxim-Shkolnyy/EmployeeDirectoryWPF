@@ -1,6 +1,9 @@
 ﻿using EmployeeDirectoryWPF.Model;
+using Prism.Commands;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -8,39 +11,70 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace EmployeeDirectoryWPF.ViewModel
+namespace EmployeeDirectoryWPF.ViewModel;
+
+public class EmployeeViewModel : BindableBase
 {
-    internal class EmployeeViewModel : DependencyObject
+    private ObservableCollection<Employee> _employees;
+    private Employee _selectedEmployee;
+
+    public ObservableCollection<Employee> Employees
     {
-        public string Filter
-        {
-            get { return (string)GetValue(FilterProperty); }
-            set { SetValue(FilterProperty, value); }
-        }
+        get { return _employees; }
+        set { SetProperty(ref _employees, value); }
+    }
 
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty FilterProperty =
-            DependencyProperty.Register("FilterProperty", typeof(string), typeof(EmployeeViewModel), new PropertyMetadata(""));
+    public Employee SelectedEmployee
+    {
+        get { return _selectedEmployee; }
+        set { SetProperty(ref _selectedEmployee, value); }
+    }
 
+    public DelegateCommand AddCommand { get; }
+    public DelegateCommand UpdateCommand { get; }
+    public DelegateCommand DeleteCommand { get; }
 
+    public EmployeeViewModel()
+    {
+        AddCommand = new DelegateCommand(AddEmployee);
+        //UpdateCommand = new DelegateCommand(UpdateEmployee, CanUpdateEmployee);
+        //DeleteCommand = new DelegateCommand(DeleteEmployee, CanDeleteEmployee);
 
-        public ICollectionView Employee
-        {
-            get { return (ICollectionView)GetValue(EmployeeProrerty); }
-            set { SetValue(EmployeeProrerty, value); }
-        }
+        // Отримання списку працівників з бази даних під час створення ViewModel
+        LoadEmployees();
+    }
 
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty EmployeeProrerty =
-            DependencyProperty.Register("Employee", typeof(ICollectionView), typeof(EmployeeViewModel), new PropertyMetadata(null));
+    private void LoadEmployees()
+    {
+        // Логіка для завантаження списку працівників з бази даних
+        // Встановлення значення Employees
+    }
 
-        public EmployeeViewModel()
-        {
-            List<Employee> employees = new List<Employee>();
-            Employee = CollectionViewSource.GetDefaultView(employees);
-        }
+    private async void AddEmployee()
+    {
+        // Логіка для додавання нового працівника в базу даних
+        // Оновлення списку працівників після додавання
+    }
 
+    //private bool CanUpdateEmployee()
+    //{
+    //    // Перевірка, чи можна оновити вибраного працівника
+    //}
 
+    private void UpdateEmployee()
+    {
+        // Логіка для оновлення вибраного працівника в базі даних
+        // Оновлення списку працівників після оновлення
+    }
 
+    //private bool CanDeleteEmployee()
+    //{
+    //    // Перевірка, чи можна видалити вибраного працівника
+    //}
+
+    private async void DeleteEmployee()
+    {
+        // Логіка для видалення вибраного працівника з бази даних
+        // Оновлення списку працівників після видалення
     }
 }
