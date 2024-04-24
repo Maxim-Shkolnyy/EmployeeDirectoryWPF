@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EmployeeDirectoryWPF.View"
         mc:Ignorable="d"
         Title="Counter" Height="450" Width="800">
     <Grid>
@@ -11,8 +10,14 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Text="{Binding Counter, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
-        <Button Grid.Row="1" Content="+" Command="{Binding IncrementCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="30"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Counter, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+        <Button Grid.Row="1" Grid.Column="0" Content="-" Command="{Binding DecrementCommand}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50" Height="30" />
+        <Button Grid.Row="1" Grid.Column="2" Content="+" Command="{Binding IncrementCommand}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Height="30"/>
     </Grid>
 </Window>

@@ -19,15 +19,22 @@ namespace EmployeeDirectoryWPF.ViewModel
         }
 
         public DelegateCommand IncrementCommand { get; }
+        public DelegateCommand DecrementCommand { get; }
 
         public CounterViewModel()
         {
             IncrementCommand = new DelegateCommand(Increment);
-        }
+            DecrementCommand = new DelegateCommand(Decrement);
+        }        
 
         private void Increment()
         {
             Counter++;
+        }
+
+        private void Decrement()
+        {
+            Counter--;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeDirectoryWPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace EmployeeDirectoryWPF.View
         public Counter()
         {
             InitializeComponent();
+            DataContext = new CounterViewModel();
         }
     }
 }
