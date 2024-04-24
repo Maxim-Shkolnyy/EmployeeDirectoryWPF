@@ -1,4 +1,5 @@
 ﻿using EmployeeDirectoryWPF.Model;
+using EmployeeDirectoryWPF.Model.YourNamespace;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeDirectoryWPF.Services
