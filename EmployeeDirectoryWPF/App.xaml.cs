@@ -1,8 +1,5 @@
-﻿using EmployeeDirectoryWPF.Model;
-using EmployeeDirectoryWPF.Services;
+﻿using EmployeeDirectoryWPF.Services;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
-using System.Data;
 using System.Windows;
 
 namespace EmployeeDirectoryWPF

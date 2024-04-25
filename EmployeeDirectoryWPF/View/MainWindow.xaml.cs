@@ -1,13 +1,7 @@
-﻿using System.Text;
+﻿using EmployeeDirectoryWPF.Model;
+using EmployeeDirectoryWPF.Services;
+using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EmployeeDirectoryWPF.ViewModel
 {
@@ -16,9 +10,22 @@ namespace EmployeeDirectoryWPF.ViewModel
     /// </summary>
     public partial class MainWindow : Window
     {
+        private EmployeeViewModel _viewModel;
+
+        public ObservableCollection<Employee> Employees { get; set; }
+
         public MainWindow()
         {
-            InitializeComponent();            
-        }        
+            InitializeComponent();
+
+            var db = new MyDbContext();
+            var empService = new EmployeeService(db);
+            _viewModel = new EmployeeViewModel(db, empService);
+            _viewModel.LoadEmployees();
+
+            Employees = _viewModel.Employees;
+
+            DataContext = this;
+        }
     }
 }

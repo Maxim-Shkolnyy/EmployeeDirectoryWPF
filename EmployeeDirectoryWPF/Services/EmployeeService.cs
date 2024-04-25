@@ -1,14 +1,9 @@
 ﻿using EmployeeDirectoryWPF.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmployeeDirectoryWPF.Services
 {
-    internal class EmployeeService
+    public class EmployeeService
     {
         private readonly MyDbContext _dbContext;
         public EmployeeService(MyDbContext dbContext)

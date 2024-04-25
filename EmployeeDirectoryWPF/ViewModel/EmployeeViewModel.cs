@@ -1,15 +1,9 @@
 ﻿using EmployeeDirectoryWPF.Model;
+using EmployeeDirectoryWPF.Services;
 using Prism.Commands;
 using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Data;
+using System.Windows.Shell;
 
 namespace EmployeeDirectoryWPF.ViewModel;
 
@@ -17,11 +11,23 @@ public class EmployeeViewModel : BindableBase
 {
     private ObservableCollection<Employee> _employees;
     private Employee _selectedEmployee;
+    private readonly MyDbContext _db;
+    private readonly EmployeeService _empService;
+
+    public EmployeeViewModel(MyDbContext db, EmployeeService empService)
+    {
+        _db = db;
+        _empService = empService;
+        Employees = new ObservableCollection<Employee>();
+        GetAllCommand = new DelegateCommand(async () => await LoadEmployees());
+    }
+
+   
 
     public ObservableCollection<Employee> Employees
     {
         get { return _employees; }
-        set { SetProperty(ref _employees, value); }
+        set { SetProperty(ref _employees, value); }        
     }
 
     public Employee SelectedEmployee
@@ -33,22 +39,34 @@ public class EmployeeViewModel : BindableBase
     public DelegateCommand AddCommand { get; }
     public DelegateCommand UpdateCommand { get; }
     public DelegateCommand DeleteCommand { get; }
+    public DelegateCommand GetAllCommand { get; }
 
-    public EmployeeViewModel()
+    //public EmployeeViewModel()
+    //{
+    //    GetAllCommand = new DelegateCommand(async () => await LoadEmployees());
+
+    //    //UpdateCommand = new DelegateCommand(UpdateEmployee, CanUpdateEmployee);
+    //    // DeleteCommand = new DelegateCommand(DeleteEmployee, CanDeleteEmployee);
+
+
+
+    //}
+
+    public async Task LoadEmployees()
     {
-        AddCommand = new DelegateCommand(AddEmployee);
-        //UpdateCommand = new DelegateCommand(UpdateEmployee, CanUpdateEmployee);
-        //DeleteCommand = new DelegateCommand(DeleteEmployee, CanDeleteEmployee);
-
-        // Отримання списку працівників з бази даних під час створення ViewModel
-        LoadEmployees();
+        var empList = await _empService.GetEmployeesAsync();
+        Employees.Clear();
+        foreach (var emp in empList)
+        {
+            Employees.Add(emp);
+        }
     }
 
-    private void LoadEmployees()
-    {
-        // Логіка для завантаження списку працівників з бази даних
-        // Встановлення значення Employees
-    }
+    //private async Task LoadEmployees()
+    //{
+    //    var empList = await _empService.GetEmployeesAsync();
+    //    Employees = new ObservableCollection<Employee>(empList);
+    //}
 
     private async void AddEmployee()
     {
