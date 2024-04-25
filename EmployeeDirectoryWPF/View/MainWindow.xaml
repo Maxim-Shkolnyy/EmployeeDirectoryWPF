@@ -54,7 +54,7 @@
             </StackPanel.Resources>
             <Button Content=" Add " />
             <Button Content=" Edit " />
-            <Button Content=" Delete All " />
+            <Button Content=" Delete " Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedEmployee}" />
             <Button Content=" Fire " />
             <Button Content=" Statistics " />
             <Button Content=" Import " />
