@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeDirectoryWPF.Services
 {
-    public class EmployeeService
+    public class EmployeeContextService
     {
         private readonly MyDbContext _dbContext;
-        public EmployeeService(MyDbContext dbContext)
+        public EmployeeContextService(MyDbContext dbContext)
         {
             _dbContext = dbContext;
         }

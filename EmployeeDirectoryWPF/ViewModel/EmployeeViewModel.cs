@@ -12,62 +12,35 @@ public class EmployeeViewModel : BindableBase
     private ObservableCollection<Employee> _employees;
     private Employee _selectedEmployee;
     private readonly MyDbContext _db;
-    private readonly EmployeeService _empService;
+    private readonly EmployeeContextService _empService;
 
-    public EmployeeViewModel(MyDbContext db, EmployeeService empService)
+    public EmployeeViewModel(MyDbContext db, EmployeeContextService empService)
     {
         _db = db;
         _empService = empService;
         Employees = new ObservableCollection<Employee>();
-        GetAllCommand = new DelegateCommand(async () => await LoadEmployees());
-    }
-
-   
+    } 
 
     public ObservableCollection<Employee> Employees
     {
         get { return _employees; }
         set { SetProperty(ref _employees, value); }        
-    }
-
-    public Employee SelectedEmployee
-    {
-        get { return _selectedEmployee; }
-        set { SetProperty(ref _selectedEmployee, value); }
-    }
+    }   
 
     public DelegateCommand AddCommand { get; }
     public DelegateCommand UpdateCommand { get; }
     public DelegateCommand DeleteCommand { get; }
     public DelegateCommand GetAllCommand { get; }
-
-    //public EmployeeViewModel()
-    //{
-    //    GetAllCommand = new DelegateCommand(async () => await LoadEmployees());
-
-    //    //UpdateCommand = new DelegateCommand(UpdateEmployee, CanUpdateEmployee);
-    //    // DeleteCommand = new DelegateCommand(DeleteEmployee, CanDeleteEmployee);
-
-
-
-    //}
+    
 
     public async Task LoadEmployees()
     {
         Employees.Clear();
         var empList = await _empService.GetEmployeesAsync();
-        
-        foreach (var emp in empList)
-        {
-            Employees.Add(emp);
-        }
-    }
 
-    //private async Task LoadEmployees()
-    //{
-    //    var empList = await _empService.GetEmployeesAsync();
-    //    Employees = new ObservableCollection<Employee>(empList);
-    //}
+        Employees.AddRange(empList);
+    }
+    
 
     private async void AddEmployee()
     {
