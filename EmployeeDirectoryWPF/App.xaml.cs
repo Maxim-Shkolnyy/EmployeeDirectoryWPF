@@ -22,11 +22,8 @@ public partial class App : Application
         //Employee = dbContext.Employees.ToObservableCollection();
 
         var db = new MyDbContext();
-        var empService = new EmployeeContextService(db);
-        _viewModel = new EmployeeViewModel(db, empService);
-        await _viewModel.LoadEmployees();
-
-
+        _viewModel = new EmployeeViewModel();
+         _viewModel.LoadEmployees();
 
         Employees = _viewModel.Employees;
 

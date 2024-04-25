@@ -5,9 +5,6 @@ using System.Windows;
 
 namespace EmployeeDirectoryWPF.ViewModel
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private EmployeeViewModel _viewModel;
@@ -17,9 +14,7 @@ namespace EmployeeDirectoryWPF.ViewModel
         public MainWindow()
         {
             InitializeComponent();
-            var db = new MyDbContext();
-            var empService = new EmployeeContextService(db);
-            _viewModel = new EmployeeViewModel(db, empService);
+            _viewModel = new EmployeeViewModel();
             _viewModel.LoadEmployees();
 
             Employees = _viewModel.Employees;

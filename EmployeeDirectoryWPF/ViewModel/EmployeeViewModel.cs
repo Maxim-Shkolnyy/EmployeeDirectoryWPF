@@ -1,5 +1,6 @@
 ﻿using EmployeeDirectoryWPF.Model;
 using EmployeeDirectoryWPF.Services;
+using Microsoft.EntityFrameworkCore;
 using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
@@ -11,62 +12,71 @@ public class EmployeeViewModel : BindableBase
 {
     private ObservableCollection<Employee> _employees;
     private Employee _selectedEmployee;
-    private readonly MyDbContext _db;
-    private readonly EmployeeContextService _empService;
 
-    public EmployeeViewModel(MyDbContext db, EmployeeContextService empService)
+    public EmployeeViewModel()
     {
-        _db = db;
-        _empService = empService;
-        Employees = new ObservableCollection<Employee>();
-    } 
+        using (var db = new MyDbContext())
+        {
+            Employees = new ObservableCollection<Employee>(db.Employees.ToList());
+        }
+        LoadEmployees(); 
+    }
 
     public ObservableCollection<Employee> Employees
     {
         get { return _employees; }
-        set { SetProperty(ref _employees, value); }        
-    }   
+        set { SetProperty(ref _employees, value); }
+    }
 
     public DelegateCommand AddCommand { get; }
     public DelegateCommand UpdateCommand { get; }
     public DelegateCommand DeleteCommand { get; }
     public DelegateCommand GetAllCommand { get; }
-    
 
-    public async Task LoadEmployees()
+    public void LoadEmployees()
     {
-        Employees.Clear();
-        var empList = await _empService.GetEmployeesAsync();
-
-        Employees.AddRange(empList);
-    }
-    
-
-    private async void AddEmployee()
-    {
-        // Логіка для додавання нового працівника в базу даних
-        // Оновлення списку працівників після додавання
+        using (var db = new MyDbContext())
+        {
+            Employees.Clear();
+            Employees.AddRange(db.Employees.ToList());
+        }
     }
 
-    //private bool CanUpdateEmployee()
-    //{
-    //    // Перевірка, чи можна оновити вибраного працівника
-    //}
-
-    private void UpdateEmployee()
+    public void AddEmployee(Employee newEmployee)
     {
-        // Логіка для оновлення вибраного працівника в базі даних
-        // Оновлення списку працівників після оновлення
+        using (var db = new MyDbContext())
+        {
+            db.Employees.Add(newEmployee);
+            db.SaveChanges();
+        }
+        LoadEmployees();
     }
 
-    //private bool CanDeleteEmployee()
-    //{
-    //    // Перевірка, чи можна видалити вибраного працівника
-    //}
-
-    private async void DeleteEmployee()
+    public void UpdateEmployee(Employee updatedEmployee)
     {
-        // Логіка для видалення вибраного працівника з бази даних
-        // Оновлення списку працівників після видалення
+        using (var db = new MyDbContext())
+        {
+            db.Employees.Update(updatedEmployee);
+            db.SaveChanges();
+        }
+        LoadEmployees(); 
+    }
+
+    public void DeleteEmployee(Employee employeeToDelete)
+    {
+        using (var db = new MyDbContext())
+        {
+            db.Employees.Remove(employeeToDelete);
+            db.SaveChanges();
+        }
+        LoadEmployees(); 
+    }
+
+    public Employee FindByName(string name)
+    {
+        using (var db = new MyDbContext())
+        {
+            return db.Employees.FirstOrDefault(e => e.Name == name);
+        }
     }
 }
