@@ -54,8 +54,9 @@ public class EmployeeViewModel : BindableBase
 
     public async Task LoadEmployees()
     {
-        var empList = await _empService.GetEmployeesAsync();
         Employees.Clear();
+        var empList = await _empService.GetEmployeesAsync();
+        
         foreach (var emp in empList)
         {
             Employees.Add(emp);
