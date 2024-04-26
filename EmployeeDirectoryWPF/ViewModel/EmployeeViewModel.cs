@@ -70,19 +70,26 @@ public class EmployeeViewModel : BindableBase
         }
     }
 
-
     public void UpdateEmployee(Employee updatedEmployee)
     {
         using (var db = new MyDbContext())
         {
-            if (db.Employees.FirstOrDefault(el => el.Id == updatedEmployee.Id) != null)
+            var existingEmployee = db.Employees.Find(updatedEmployee.Id);
+            if (existingEmployee != null)
             {
-                db.Employees.Update(updatedEmployee);
+                existingEmployee.Name = updatedEmployee.Name;
+                existingEmployee.Address = updatedEmployee.Address;
+                existingEmployee.Salary = updatedEmployee.Salary;
+                existingEmployee.Status = updatedEmployee.Status;
+                existingEmployee.DateOfBirth = updatedEmployee.DateOfBirth;
+                existingEmployee.DateOfHiring = updatedEmployee.DateOfHiring;
+                existingEmployee.DateOfRetirement = updatedEmployee.DateOfRetirement;
                 db.SaveChanges();
+                LoadEmployees();
             }
         }
-        LoadEmployees(); 
     }
+
 
     public void DeleteEmployee(Employee employeeToDelete)
     {
