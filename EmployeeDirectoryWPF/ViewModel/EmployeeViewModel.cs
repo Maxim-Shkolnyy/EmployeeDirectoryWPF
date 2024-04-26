@@ -5,6 +5,8 @@ using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
 using System.Net;
+using System.Windows;
+using System.Windows.Input;
 using System.Windows.Shell;
 
 namespace EmployeeDirectoryWPF.ViewModel;
@@ -16,11 +18,12 @@ public class EmployeeViewModel : BindableBase
 
     public EmployeeViewModel()
     {
-        using (var db = new MyDbContext())
-        {
-            Employees = new ObservableCollection<Employee>(db.Employees.ToList());
-        }
-        LoadEmployees(); 
+        Employees = new ObservableCollection<Employee>();
+        AddCommand = new DelegateCommand(() => AddEmployee(new Employee()));
+
+        UpdateCommand = new DelegateCommand(() => UpdateEmployee(new Employee()));
+        DeleteCommand = new DelegateCommand(() => DeleteEmployee(new Employee()));
+        GetAllCommand = new DelegateCommand(() => LoadEmployees());
     }
 
     public ObservableCollection<Employee> Employees
@@ -29,10 +32,16 @@ public class EmployeeViewModel : BindableBase
         set { SetProperty(ref _employees, value); }
     }
 
-    public DelegateCommand AddCommand { get; }
-    public DelegateCommand UpdateCommand { get; }
-    public DelegateCommand DeleteCommand { get; }
-    public DelegateCommand GetAllCommand { get; }
+    public Employee SelectedEmployee
+    {
+        get { return _selectedEmployee; }
+        set { SetProperty(ref _selectedEmployee, value); }
+    }
+
+    public ICommand AddCommand { get; }
+    public ICommand UpdateCommand { get; }
+    public ICommand DeleteCommand { get; }
+    public ICommand GetAllCommand { get; }
 
     public void LoadEmployees()
     {
@@ -47,34 +56,30 @@ public class EmployeeViewModel : BindableBase
     {
         using (var db = new MyDbContext())
         {
-            bool checkIsExist = db.Employees.Any(el => el.Name == newEmployee.Name);
-            if (!checkIsExist)
+            if (db.Employees.FirstOrDefault(el => el.Name == newEmployee.Name) == null)
             {
-                Employee emp = new Employee
-                {
-                    Name = newEmployee.Name,
-                    Address = newEmployee.Address,
-                    DateOfBirth = newEmployee.DateOfBirth,
-                    Phone = newEmployee.Phone,
-                    JobTitle = newEmployee.JobTitle,
-                    Status = newEmployee.Status,
-                    Salary = newEmployee.Salary,
-                    DateOfHiring = newEmployee.DateOfHiring,
-                    DateOfRetirement = newEmployee.DateOfRetirement,
-                };
-                db.Employees.Add(emp);
+                db.Employees.Add(newEmployee);
                 db.SaveChanges();
+                LoadEmployees();
+            }
+            else 
+            {
+                MessageBox.Show("Employee with this name already exists!");
+                return;
             }
         }
-        LoadEmployees();
     }
+
 
     public void UpdateEmployee(Employee updatedEmployee)
     {
         using (var db = new MyDbContext())
         {
-            db.Employees.Update(updatedEmployee);
-            db.SaveChanges();
+            if (db.Employees.FirstOrDefault(el => el.Id == updatedEmployee.Id) != null)
+            {
+                db.Employees.Update(updatedEmployee);
+                db.SaveChanges();
+            }
         }
         LoadEmployees(); 
     }
@@ -83,17 +88,12 @@ public class EmployeeViewModel : BindableBase
     {
         using (var db = new MyDbContext())
         {
-            db.Employees.Remove(employeeToDelete);
-            db.SaveChanges();
+            if (db.Employees.FirstOrDefault(el => el.Id == employeeToDelete.Id) != null)
+            {
+                db.Employees.Remove(employeeToDelete);
+                db.SaveChanges();
+            }
         }
         LoadEmployees(); 
-    }
-
-    public Employee FindByName(string name)
-    {
-        using (var db = new MyDbContext())
-        {
-            return db.Employees.FirstOrDefault(e => e.Name == name);
-        }
-    }
+    }    
 }
