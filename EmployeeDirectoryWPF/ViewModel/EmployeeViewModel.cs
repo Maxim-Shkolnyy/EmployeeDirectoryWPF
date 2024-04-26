@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
+using System.Net;
 using System.Windows.Shell;
 
 namespace EmployeeDirectoryWPF.ViewModel;
@@ -46,8 +47,24 @@ public class EmployeeViewModel : BindableBase
     {
         using (var db = new MyDbContext())
         {
-            db.Employees.Add(newEmployee);
-            db.SaveChanges();
+            bool checkIsExist = db.Employees.Any(el => el.Name == newEmployee.Name);
+            if (!checkIsExist)
+            {
+                Employee emp = new Employee
+                {
+                    Name = newEmployee.Name,
+                    Address = newEmployee.Address,
+                    DateOfBirth = newEmployee.DateOfBirth,
+                    Phone = newEmployee.Phone,
+                    JobTitle = newEmployee.JobTitle,
+                    Status = newEmployee.Status,
+                    Salary = newEmployee.Salary,
+                    DateOfHiring = newEmployee.DateOfHiring,
+                    DateOfRetirement = newEmployee.DateOfRetirement,
+                };
+                db.Employees.Add(emp);
+                db.SaveChanges();
+            }
         }
         LoadEmployees();
     }
