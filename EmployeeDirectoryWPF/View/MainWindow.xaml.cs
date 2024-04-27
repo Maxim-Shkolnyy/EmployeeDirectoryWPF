@@ -14,9 +14,9 @@ namespace EmployeeDirectoryWPF.ViewModel
         public MainWindow()
         {
             InitializeComponent();
-            //_viewModel = new EmployeeViewModel();
-            //_viewModel.LoadEmployees();
-            //Employees = _viewModel.Employees;
+            _viewModel = new EmployeeViewModel();
+            _viewModel.LoadEmployees();
+            Employees = _viewModel.Employees;
             DataContext = this;
         }
     }

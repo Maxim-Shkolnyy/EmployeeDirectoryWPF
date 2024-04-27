@@ -11,6 +11,7 @@ namespace EmployeeDirectoryWPF;
 public partial class App : Application
 {
     private EmployeeViewModel _viewModel;
+    private readonly MyDbContext _dbContext;
 
     public ObservableCollection<Employee> Employees { get; set; }
 
@@ -18,11 +19,11 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        using (var dbContext = new MyDbContext())
-        {
-            _viewModel = new EmployeeViewModel(); 
-            Employees = _viewModel.Employees;
-        }
+        //using (var dbContext = new MyDbContext())
+        //{
+        //    _viewModel = new EmployeeViewModel(); 
+        //    Employees = _viewModel.Employees;
+        //}
 
         //dbContext.Employees.Load();
         //Employee = dbContext.Employees.ToObservableCollection();

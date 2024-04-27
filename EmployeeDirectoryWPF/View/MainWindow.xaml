@@ -64,7 +64,7 @@
 
         <Grid Grid.Row="2">
 
-            <DataGrid ItemsSource="{Binding GetAllCommand}" AutoGenerateColumns="True"/>
+            <DataGrid ItemsSource="{Binding Employees}" AutoGenerateColumns="True"/>
             
 
 
