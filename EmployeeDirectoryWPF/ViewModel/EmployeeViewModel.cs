@@ -42,8 +42,25 @@ public class EmployeeViewModel : BindableBase
     public DelegateCommand GetAllCommand { get; }
     public DelegateCommand AddCommand { get; }
     public DelegateCommand UpdateCommand { get; }
-    public DelegateCommand DeleteCommand { get; }
-    
+    public DelegateCommand DeleteCommand { get; }    
+
+    private async void ExecuteGetAllCommand() 
+    {
+        Employees.Clear();
+
+        try
+        {
+            using (var db = new MyDbContext())
+            {
+                var employees = await db.Employees.ToListAsync(); 
+                Employees.AddRange(employees);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error loading employees: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
 
     public void LoadEmployees()
     {
@@ -53,6 +70,11 @@ public class EmployeeViewModel : BindableBase
             Employees.AddRange(db.Employees.ToList());
         }
     }
+
+    //public void LoadEmployees() 
+    //{
+    //    ExecuteGetAllCommand(); 
+    //}
 
     public void AddEmployee(Employee newEmployee)
     {
