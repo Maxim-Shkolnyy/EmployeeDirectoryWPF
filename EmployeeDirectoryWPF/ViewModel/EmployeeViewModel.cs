@@ -19,11 +19,12 @@ public class EmployeeViewModel : BindableBase
     public EmployeeViewModel()
     {
         Employees = new ObservableCollection<Employee>();
-        AddCommand = new DelegateCommand(() => AddEmployee(new Employee()));
+        //AddCommand = new DelegateCommand(() => AddEmployee(new Employee()));
 
-        UpdateCommand = new DelegateCommand(() => UpdateEmployee(new Employee()));
-        DeleteCommand = new DelegateCommand(() => DeleteEmployee(new Employee()));
-        GetAllCommand = new DelegateCommand(() => LoadEmployees());
+        //UpdateCommand = new DelegateCommand(() => UpdateEmployee(new Employee()));
+        //DeleteCommand = new DelegateCommand(() => DeleteEmployee(new Employee()));
+        GetAllCommand = new DelegateCommand(LoadEmployees);
+        LoadEmployees();
     }
 
     public ObservableCollection<Employee> Employees
@@ -38,10 +39,11 @@ public class EmployeeViewModel : BindableBase
         set { SetProperty(ref _selectedEmployee, value); }
     }
 
-    public ICommand AddCommand { get; }
-    public ICommand UpdateCommand { get; }
-    public ICommand DeleteCommand { get; }
-    public ICommand GetAllCommand { get; }
+    public DelegateCommand GetAllCommand { get; }
+    public DelegateCommand AddCommand { get; }
+    public DelegateCommand UpdateCommand { get; }
+    public DelegateCommand DeleteCommand { get; }
+    
 
     public void LoadEmployees()
     {
@@ -62,7 +64,7 @@ public class EmployeeViewModel : BindableBase
                 db.SaveChanges();
                 LoadEmployees();
             }
-            else 
+            else
             {
                 MessageBox.Show("Employee with this name already exists!");
                 return;
