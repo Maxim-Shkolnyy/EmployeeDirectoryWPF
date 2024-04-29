@@ -4,7 +4,8 @@
         Title="Додати нового користувача"
         ShowInTaskbar="False"
         WindowStyle="ToolWindow"
-        ResizeMode="NoResize">
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style TargetType="TextBox">
@@ -64,8 +65,8 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Зберегти" Command="{Binding AddUserCommand}" Margin="40" />
-            <Button Grid.Column="1" Content="Відміна" Command="{Binding CloseCommand}" Margin="40" />
+            <Button IsDefault="True" Grid.Column="0" Content="Зберегти" Command="{Binding AddUserCommand}" Margin="40"  />
+            <Button IsCancel="True" Grid.Column="1" Content="Відміна" Command="{Binding CloseCommand}" Margin="40" />
         </Grid>
     </Grid>
 </Window>
