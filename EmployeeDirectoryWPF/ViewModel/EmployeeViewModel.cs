@@ -1,5 +1,6 @@
 ﻿using EmployeeDirectoryWPF.Model;
 using EmployeeDirectoryWPF.Services;
+using EmployeeDirectoryWPF.View;
 using Microsoft.EntityFrameworkCore;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -15,6 +16,7 @@ public class EmployeeViewModel : BindableBase
 {
     private ObservableCollection<Employee> _employees;
     private Employee _selectedEmployee;
+    private AddWindow _addUserWindow;
 
     public EmployeeViewModel()
     {
@@ -60,6 +62,13 @@ public class EmployeeViewModel : BindableBase
         {
             MessageBox.Show($"Error loading employees: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
+    }
+
+    public void OpenAddWindow()
+    {
+        _addUserWindow = new AddWindow();
+        _addUserWindow.DataContext = new AddWindow(); 
+        _addUserWindow.ShowDialog();
     }
 
     public void LoadEmployees()
