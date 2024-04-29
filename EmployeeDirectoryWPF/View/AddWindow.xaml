@@ -4,21 +4,23 @@
         Title="Додати нового користувача"
         ShowInTaskbar="False"
         WindowStyle="ToolWindow"
-        ResizeMode="CanResize"
-        WindowStartupLocation="CenterScreen">
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterOwner"
+        SizeToContent="WidthAndHeight">
+        
 
     <Window.Resources>
         <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="5" />
+            <Setter Property="Margin" Value="15" />
             <Setter Property="Width" Value="200" />
         </Style>
         <Style TargetType="DatePicker">
-            <Setter Property="Margin" Value="10" />
-            <Setter Property="Width" Value="100" />
+            <Setter Property="Margin" Value="35" />
+            <Setter Property="Width" Value="300" />
         </Style>
     </Window.Resources>
 
-    <Grid Margin="15" Width="260" Height="350">
+    <Grid Margin="65" Width="560" Height="640">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -29,6 +31,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Ім'я:" />
@@ -55,18 +59,14 @@
         <TextBlock Grid.Row="7" Grid.Column="0" Text="Дата найму:" />
         <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate="{Binding DateOfHiring}" />
 
-        <TextBlock Grid.Row="8" Grid.Column="0" Text="Дата звільнення:" />
-        <DatePicker Grid.Row="8" Grid.Column="1" SelectedDate="{Binding DateOfRetirement}" />
+        <TextBlock Grid.Column="0" Grid.Row="8" Text="Дата звільнення:" />
+        <DatePicker Grid.Column="1" Grid.Row="8" SelectedDate="{Binding DateOfRetirement}" />
 
+        <StackPanel Grid.Row="9" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20">
+            <Button IsDefault="True" Content="Зберегти" Command="{Binding AddUserCommand}" Margin="0,0,25,0" />
+            <Button IsCancel="True" Content="Відміна" Command="{Binding CloseCommand}"  />
+        </StackPanel>
 
-        <Grid Grid.Row="9" ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-
-            <Button IsDefault="True" Grid.Column="0" Content="Зберегти" Command="{Binding AddUserCommand}" Margin="40"  />
-            <Button IsCancel="True" Grid.Column="1" Content="Відміна" Command="{Binding CloseCommand}" Margin="40" />
-        </Grid>
     </Grid>
+
 </Window>

@@ -28,7 +28,7 @@ namespace EmployeeDirectoryWPF.ViewModel
             _addUserWindow = new AddWindow();
             _addUserWindow.Owner = this;
             //this.DialogResult = true;
-            _addUserWindow.Show();
+            _addUserWindow.ShowDialog();
         }
     }
 }

@@ -18,20 +18,6 @@ public partial class App : Application
     protected override async void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
-
-        //using (var dbContext = new MyDbContext())
-        //{
-        //    _viewModel = new EmployeeViewModel(); 
-        //    Employees = _viewModel.Employees;
-        //}
-
-        //dbContext.Employees.Load();
-        //Employee = dbContext.Employees.ToObservableCollection();
-
-        //var db = new MyDbContext();
-        //_viewModel = new EmployeeViewModel();
-        //_viewModel.LoadEmployees();
-
-        //Employees = _viewModel.Employees;        
+       
     }
 }
