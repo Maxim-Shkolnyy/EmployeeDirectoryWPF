@@ -32,37 +32,42 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+
 
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Ім'я:" />
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}" />
+        <TextBlock Grid.Row="0" >Додати нового користувача</TextBlock>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Адреса:" />
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Address}" />
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Ім'я:" />
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name}" />
 
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Дата народження:" />
-        <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding DateOfBirth}" />
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Адреса:" />
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Address}" />
 
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Телефон:" />
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Phone}" />
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Дата народження:" />
+        <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding DateOfBirth}" />
 
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Посада:" />
-        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding JobTitle}" />
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Телефон:" />
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Phone}" />
 
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Статус:" />
-        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Status}" />
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Посада:" />
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding JobTitle}" />
 
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="Зарплата:" />
-        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Salary, StringFormat=C2}" />
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Статус:" />
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Status}" />
 
-        <TextBlock Grid.Row="7" Grid.Column="0" Text="Дата найму:" />
-        <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate="{Binding DateOfHiring}" />
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="Зарплата:" />
+        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Salary, StringFormat=C2}" />
 
-        <TextBlock Grid.Column="0" Grid.Row="8" Text="Дата звільнення:" />
-        <DatePicker Grid.Column="1" Grid.Row="8" SelectedDate="{Binding DateOfRetirement}" />
+        <TextBlock Grid.Row="8" Grid.Column="0" Text="Дата найму:" />
+        <DatePicker Grid.Row="8" Grid.Column="1" SelectedDate="{Binding DateOfHiring}" />
 
-        <StackPanel Grid.Row="9" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20">
+        <TextBlock Grid.Column="9" Grid.Row="8" Text="Дата звільнення:" />
+        <DatePicker Grid.Column="9" Grid.Row="8" SelectedDate="{Binding DateOfRetirement}" />
+
+        <StackPanel Grid.Row="10" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20">
             <Button IsDefault="True" Content="Зберегти" Command="{Binding AddUserCommand}" Margin="0,0,25,0" />
             <Button IsCancel="True" Content="Відміна" Command="{Binding CloseCommand}"  />
         </StackPanel>
