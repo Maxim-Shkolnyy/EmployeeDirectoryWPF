@@ -49,7 +49,7 @@
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Адреса:" />
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged, ValidationRules=" }" />
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Дата народження:" />
         <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged}" />

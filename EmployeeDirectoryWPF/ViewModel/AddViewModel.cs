@@ -2,6 +2,7 @@
 using EmployeeDirectoryWPF.Services;
 using Microsoft.EntityFrameworkCore;
 using Prism.Commands;
+using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,65 +12,77 @@ using System.Windows.Input;
 
 namespace EmployeeDirectoryWPF.ViewModel;
 
-public class AddUserViewModel : INotifyPropertyChanged
+public class AddViewModel : BindableBase
 {
+    private readonly IDbCommand _addUserCommand;
+    private readonly MyDbContext _db;
     private Employee _newEmployee;
     private ObservableCollection<Employee> _employees;
-    private IDbCommand _addUserCommand;
-    private MyDbContext _db;
 
-    public AddUserViewModel(ObservableCollection<Employee> Employees, IDbCommand addUserCommand, MyDbContext db)
+    public AddViewModel(ObservableCollection<Employee> employees, IDbCommand addUserCommand, MyDbContext db)
     {
-        _employees = Employees;
+        _employees = employees;
         _addUserCommand = addUserCommand;
         _newEmployee = new Employee();
         _db = db;
+
+        AddUserCommand = new DelegateCommand(AddNewEmployee, CanAddNewEmployee).ObservesProperty(() => NewEmployee);
     }
 
     public Employee NewEmployee
     {
-        get { return _newEmployee; }
-        set
-        {
-            _newEmployee = value;
-            OnPropertyChanged("NewEmployee");
-        }
+        get => _newEmployee;
+        set => SetProperty(ref _newEmployee, value);
     }
 
-    public ICommand AddUserCommand
+    public ICommand AddUserCommand { get; }
+
+    private void AddNewEmployee()
     {
-        get
+        try
         {
-            return new DelegateCommand(() =>
+            if (!CanAddNewEmployee())
             {
-                try
-                {
-                    _db.Add(_newEmployee);
-                    _db.SaveChanges();
+                return;
+            }
 
-                    _employees.Add(new Employee
-                    {
-                        Name = _newEmployee.Name,
-                        Address = _newEmployee.Address,
-                        DateOfBirth = _newEmployee.DateOfBirth,
-                        Phone = _newEmployee.Phone,
-                        JobTitle = _newEmployee.JobTitle,
-                        Status = _newEmployee.Status,
-                        Salary = _newEmployee.Salary,
-                        DateOfHiring = _newEmployee.DateOfHiring,
-                        DateOfRetirement = _newEmployee.DateOfRetirement
-                    });
 
-                    NewEmployee = new Employee();
-                }
-                catch (DbUpdateException ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+            _employees.Add(new Employee
+            {
+                Name = _newEmployee.Name,
+                Address = _newEmployee.Address,
+                DateOfBirth = _newEmployee.DateOfBirth,
+                Phone = _newEmployee.Phone,
+                JobTitle = _newEmployee.JobTitle,
+                Status = _newEmployee.Status,
+                Salary = _newEmployee.Salary,
+                DateOfHiring = _newEmployee.DateOfHiring,
+                DateOfRetirement = _newEmployee.DateOfRetirement
             });
 
+            _db.SaveChanges();
+
+            NewEmployee = new Employee();
+        }
+        catch (DbUpdateException ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
+
+    private bool CanAddNewEmployee()
+    {
+        if (_newEmployee != null && !string.IsNullOrEmpty(_newEmployee.Error))
+        {
+            MessageBox.Show("Не всі дані коректні. Будь ласка, виправте помилки вводу.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return false;
+        }
+
+
+        return true;
+    }
+
+
 
     public event PropertyChangedEventHandler PropertyChanged;
 

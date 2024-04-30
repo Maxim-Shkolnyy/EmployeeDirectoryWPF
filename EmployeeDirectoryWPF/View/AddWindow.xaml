@@ -1,6 +1,10 @@
 ﻿<Window x:Class="EmployeeDirectoryWPF.View.AddWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewmodel="clr-namespace:EmployeeDirectoryWPF.ViewModel" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d:DataContext="{d:DesignInstance Type=viewmodel:AddViewModel}"
         Title="Додати нового користувача"
         ShowInTaskbar="False"
         WindowStyle="ToolWindow"
@@ -72,7 +76,7 @@
         <DatePicker Grid.Row="9" Grid.Column="1"  SelectedDate="{Binding DateOfRetirement}" />
 
         <StackPanel Grid.Row="10" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20">
-            <Button IsDefault="True" Content="Зберегти" Command="{Binding AddUserCommand}" Margin="0,0,25,0" />
+            <Button IsDefault="True" Content="Зберегти" Command="{Binding d.AddUserCommand}" Margin="0,0,25,0" />
             <Button IsCancel="True" Content="Відміна" Command="{Binding CloseCommand}"  />
         </StackPanel>
 
