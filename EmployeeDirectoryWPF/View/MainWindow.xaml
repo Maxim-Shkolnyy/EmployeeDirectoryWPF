@@ -68,13 +68,24 @@
                 <ColumnDefinition Width="283*"/>
             </Grid.ColumnDefinitions>
 
-            <DataGrid ItemsSource="{Binding Employees}" AutoGenerateColumns="True" Grid.ColumnSpan="2" HorizontalAlignment="Center" SelectionChanged="DataGridSelectionChanged"/>
+            <DataGrid ItemsSource="{Binding Employees}" AutoGenerateColumns="False" Grid.ColumnSpan="2" HorizontalAlignment="Center" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Header="Select" Binding="{Binding IsSelected}" Width="50"/>
+
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Address" Binding="{Binding Address}"/>
+                    <DataGridTextColumn Header="DateOfBirth" Binding="{Binding DateOfBirth}"/>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
+                    <DataGridTextColumn Header="JobTitle" Binding="{Binding JobTitle}"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                    <DataGridTextColumn Header="Salary" Binding="{Binding Salary}"/>
+                    <DataGridTextColumn Header="DateOfHiring" Binding="{Binding DateOfHiring}"/>
+                    <DataGridTextColumn Header="DateOfRetirement" Binding="{Binding DateOfRetirement}"/>
+                </DataGrid.Columns>
+            </DataGrid>
 
 
 
-            <!--<DataGrid x:Name="Models" AutoGenerateColumns="True">-->
-
-            <!--</DataGrid>-->
         </Grid>
     </Grid>
 

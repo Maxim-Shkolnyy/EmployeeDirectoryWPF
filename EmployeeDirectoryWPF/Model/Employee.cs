@@ -1,10 +1,40 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EmployeeDirectoryWPF.Model;
 
-public class Employee
+public class Employee : IDataErrorInfo
 {
+    public string this[string columnName]
+    {
+        get
+        {
+            string? error = null;
+
+            switch (columnName)
+            {
+                case "Name":
+                    if (string.IsNullOrWhiteSpace(Name) || Name.Length < 4)
+                        error = "Ім'я повинно містити принаймні 4 символи.";
+                    break;
+                case "Address":
+                    if (string.IsNullOrWhiteSpace(Address) || Address.Length < 4)
+                        error = "Адреса повинна містити принаймні 4 символи.";
+                    break;
+                case "DateOfHiring":
+                    if (DateOfRetirement.HasValue && DateOfRetirement.Value < DateOfHiring)
+                        error = "Дата звільнення не може бути раніше дати найму.";
+                    break;
+            }
+
+            return error;
+        }
+    }
+
+    public string Error => throw new NotImplementedException();
+
+
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
@@ -17,6 +47,7 @@ public class Employee
     public decimal Salary { get; set; }
     public DateTime DateOfHiring { get; set; } = DateTime.Now;
     public DateTime? DateOfRetirement { get; set; }
+
 }
 
 

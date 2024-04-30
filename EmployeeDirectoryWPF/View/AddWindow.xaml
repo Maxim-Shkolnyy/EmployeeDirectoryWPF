@@ -13,10 +13,14 @@
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="15" />
             <Setter Property="Width" Value="200" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="20" />
+
         </Style>
         <Style TargetType="DatePicker">
-            <Setter Property="Margin" Value="35" />
-            <Setter Property="Width" Value="300" />
+            <Setter Property="Margin" Value="15" />
+            <Setter Property="Width" Value="200" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </Window.Resources>
 
@@ -38,7 +42,7 @@
 
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" >Додати нового користувача</TextBlock>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="20" >Додати нового користувача</TextBlock>
 
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Ім'я:" />
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name}" />
@@ -64,8 +68,8 @@
         <TextBlock Grid.Row="8" Grid.Column="0" Text="Дата найму:" />
         <DatePicker Grid.Row="8" Grid.Column="1" SelectedDate="{Binding DateOfHiring}" />
 
-        <TextBlock Grid.Column="9" Grid.Row="8" Text="Дата звільнення:" />
-        <DatePicker Grid.Column="9" Grid.Row="8" SelectedDate="{Binding DateOfRetirement}" />
+        <TextBlock Grid.Row="9" Grid.Column="0"  Text="Дата звільнення:" />
+        <DatePicker Grid.Row="9" Grid.Column="1"  SelectedDate="{Binding DateOfRetirement}" />
 
         <StackPanel Grid.Row="10" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,20">
             <Button IsDefault="True" Content="Зберегти" Command="{Binding AddUserCommand}" Margin="0,0,25,0" />

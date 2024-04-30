@@ -11,6 +11,7 @@ namespace EmployeeDirectoryWPF.ViewModel
     {
         private EmployeeViewModel _viewModel;
         private AddWindow _addUserWindow;
+        private EditWindow _editUserWindow;
         private Employee _selectedEmployee;
 
 
@@ -32,7 +33,7 @@ namespace EmployeeDirectoryWPF.ViewModel
 
             _addUserWindow = new AddWindow();
             _addUserWindow.Owner = this;
-            _addUserWindow.Closed += AddWindowClosed;
+            _addUserWindow.Closed += WindowClosed;
             _addUserWindow.ShowDialog();
         }
 
@@ -42,30 +43,30 @@ namespace EmployeeDirectoryWPF.ViewModel
             {
                 int employeeId = _selectedEmployee.Id;
                 EditEmployee(employeeId);
-            }
-            else
-            {
-            }
+            }            
         }
 
         private void EditEmployee(int employeeId)
         {
-            // Виконайте редагування співробітника з використанням його ID
-            // Тут ви можете викликати відповідний метод для редагування співробітника у вашому ViewModel
+            this.Opacity = 0.4;
+
+            _editUserWindow = new EditWindow();
+            _editUserWindow.Owner = this;
+            _editUserWindow.Closed += WindowClosed;
+            _editUserWindow.ShowDialog(); 
         }
 
         private void DataGridSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Отримуємо вибраний об'єкт Employee
             if (sender is DataGrid dataGrid)
             {
                 _selectedEmployee = dataGrid.SelectedItem as Employee;
             }
         }
 
-        private void AddWindowClosed(object sender, EventArgs e)
+        private void WindowClosed(object sender, EventArgs e)
         {
             this.Opacity = 1;
-        }
+        }        
     }
 }
