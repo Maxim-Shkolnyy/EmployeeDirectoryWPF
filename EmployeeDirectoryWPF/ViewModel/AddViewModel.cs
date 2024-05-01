@@ -14,7 +14,7 @@ namespace EmployeeDirectoryWPF.ViewModel;
 
 public class AddViewModel : BindableBase
 {
-    private readonly IDbCommand _addUserCommand;
+    //private readonly IDbCommand _addUserCommand;
     private readonly MyDbContext _db;
     private Employee _newEmployee;
     private ObservableCollection<Employee> _employees;
@@ -22,7 +22,7 @@ public class AddViewModel : BindableBase
     public AddViewModel(ObservableCollection<Employee> employees, IDbCommand addUserCommand, MyDbContext db)
     {
         _employees = employees;
-        _addUserCommand = addUserCommand;
+        //_addUserCommand = addUserCommand;
         _newEmployee = new Employee();
         _db = db;
 
