@@ -17,18 +17,7 @@ public class AddViewModel : BindableBase
     //private readonly IDbCommand _addUserCommand;
     private readonly MyDbContext _db;
     private Employee _newEmployee;
-    private ObservableCollection<Employee> _employees;
-
-    public AddViewModel(ObservableCollection<Employee> employees, IDbCommand addUserCommand, MyDbContext db)
-    {
-        _employees = employees;
-        //_addUserCommand = addUserCommand;
-        _newEmployee = new Employee();
-        _db = db;
-
-        AddUserCommand = new DelegateCommand(AddNewEmployee, CanAddNewEmployee)
-            .ObservesCanExecute(() => CanAdd);
-    }
+    private ObservableCollection<Employee> _employees;    
 
     public Employee NewEmployee
     {
@@ -36,15 +25,24 @@ public class AddViewModel : BindableBase
         set => SetProperty(ref _newEmployee, value);
     }
 
-    private bool _canAdd;
-
-    public bool CanAdd
+    private bool _isEnabled;
+    public bool IsEnabled
     {
-        get => _canAdd;
-        set => SetProperty(ref _canAdd, value);
+        get { return _isEnabled; }
+        set { SetProperty(ref _isEnabled, value); }
     }
 
-    public DelegateCommand AddUserCommand { get; }
+    public DelegateCommand AddUserCommand { get; private set; }
+
+    public AddViewModel(ObservableCollection<Employee> employees, MyDbContext db)
+    {
+        _employees = employees;
+        _newEmployee = new Employee();
+        _db = db;
+
+        AddUserCommand = new DelegateCommand(AddNewEmployee)
+            .ObservesCanExecute(() => IsEnabled);
+    }
 
     private void AddNewEmployee()
     {
