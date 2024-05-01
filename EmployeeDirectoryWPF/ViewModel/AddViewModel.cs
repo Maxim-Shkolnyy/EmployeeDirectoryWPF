@@ -26,7 +26,8 @@ public class AddViewModel : BindableBase
         _newEmployee = new Employee();
         _db = db;
 
-        AddUserCommand = new DelegateCommand(AddNewEmployee, CanAddNewEmployee).ObservesProperty(() => NewEmployee);
+        AddUserCommand = new DelegateCommand(AddNewEmployee, CanAddNewEmployee)
+            .ObservesCanExecute(() => CanAdd);
     }
 
     public Employee NewEmployee
@@ -35,7 +36,15 @@ public class AddViewModel : BindableBase
         set => SetProperty(ref _newEmployee, value);
     }
 
-    public ICommand AddUserCommand { get; }
+    private bool _canAdd;
+
+    public bool CanAdd
+    {
+        get => _canAdd;
+        set => SetProperty(ref _canAdd, value);
+    }
+
+    public DelegateCommand AddUserCommand { get; }
 
     private void AddNewEmployee()
     {
@@ -45,7 +54,6 @@ public class AddViewModel : BindableBase
             {
                 return;
             }
-
 
             _employees.Add(new Employee
             {
@@ -70,24 +78,15 @@ public class AddViewModel : BindableBase
         }
     }
 
+
     private bool CanAddNewEmployee()
     {
         if (_newEmployee != null && !string.IsNullOrEmpty(_newEmployee.Error))
         {
-            MessageBox.Show("Не всі дані коректні. Будь ласка, виправте помилки вводу.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Не всі дані коректні.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }
 
-
         return true;
-    }
-
-
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    private void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
