@@ -1,7 +1,7 @@
-﻿using EmployeeDirectoryWPF.ViewModel;
+﻿using EmployeeDirectoryWPF.ViewModels;
 using System.Windows;
 
-namespace EmployeeDirectoryWPF.View
+namespace EmployeeDirectoryWPF.Views
 {
     /// <summary>
     /// Interaction logic for Counter.xaml

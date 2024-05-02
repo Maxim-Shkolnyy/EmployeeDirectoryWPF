@@ -1,7 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 
-namespace EmployeeDirectoryWPF.ViewModel
+namespace EmployeeDirectoryWPF.ViewModels
 {
     internal class CounterViewModel : BindableBase
     {

@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using EmployeeDirectoryWPF.Services;
-using EmployeeDirectoryWPF.ViewModel;
+using EmployeeDirectoryWPF.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

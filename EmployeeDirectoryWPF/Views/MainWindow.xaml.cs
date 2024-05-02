@@ -1,11 +1,11 @@
 ﻿using EmployeeDirectoryWPF.Model;
 using EmployeeDirectoryWPF.Services;
-using EmployeeDirectoryWPF.View;
+using EmployeeDirectoryWPF.Views;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace EmployeeDirectoryWPF.ViewModel
+namespace EmployeeDirectoryWPF.ViewModels
 {
     public partial class MainWindow : Window
     {
@@ -35,6 +35,7 @@ namespace EmployeeDirectoryWPF.ViewModel
             _addUserWindow.Owner = this;
             _addUserWindow.Closed += WindowClosed;
             _addUserWindow.ShowDialog();
+
         }
 
         private void EditButtonClick(object sender, RoutedEventArgs e)

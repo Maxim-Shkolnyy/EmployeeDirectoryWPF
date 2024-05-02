@@ -1,6 +1,6 @@
 ﻿using EmployeeDirectoryWPF.Model;
 using EmployeeDirectoryWPF.Services;
-using EmployeeDirectoryWPF.View;
+using EmployeeDirectoryWPF.Views;
 using Microsoft.EntityFrameworkCore;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shell;
 
-namespace EmployeeDirectoryWPF.ViewModel;
+namespace EmployeeDirectoryWPF.ViewModels;
 
 public class EmployeeViewModel : BindableBase
 {
@@ -66,9 +66,15 @@ public class EmployeeViewModel : BindableBase
 
     public void OpenAddWindow()
     {
-        _addUserWindow = new AddWindow();
-        _addUserWindow.DataContext = new AddWindow(); 
-        _addUserWindow.ShowDialog();
+
+        using (var db = new MyDbContext())
+        {
+            _addUserWindow = new AddWindow();
+            _addUserWindow.DataContext = _addUserWindow;
+            _addUserWindow.ShowDialog();
+        }
+
+
     }
 
     public void LoadEmployees()

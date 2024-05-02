@@ -1,6 +1,6 @@
 ﻿using EmployeeDirectoryWPF.Model;
 using EmployeeDirectoryWPF.Services;
-using EmployeeDirectoryWPF.ViewModel;
+using EmployeeDirectoryWPF.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.Windows;

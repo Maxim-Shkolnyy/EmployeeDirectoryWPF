@@ -10,9 +10,9 @@ using System.Data;
 using System.Windows;
 using System.Windows.Input;
 
-namespace EmployeeDirectoryWPF.ViewModel;
+namespace EmployeeDirectoryWPF.ViewModels;
 
-public class AddViewModel : BindableBase
+public class AddWindowViewModel : BindableBase
 {
     //private readonly IDbCommand _addUserCommand;
     private readonly MyDbContext _db;
@@ -28,17 +28,24 @@ public class AddViewModel : BindableBase
     private bool _isEnabled;
     public bool IsEnabled
     {
-        get { return _isEnabled; }
+        get { return true; }
         set { SetProperty(ref _isEnabled, value); }
     }
 
     public DelegateCommand AddUserCommand { get; private set; }
 
-    public AddViewModel(ObservableCollection<Employee> employees, MyDbContext db)
+    public AddWindowViewModel()
     {
-        _employees = employees;
-        _newEmployee = new Employee();
-        _db = db;
+        using (MyDbContext db = new MyDbContext())
+        {
+            _db = db;
+            _newEmployee = new Employee();
+            _isEnabled = true;
+            _employees = new ObservableCollection<Employee>();
+            _employees.AddRange(db.Employees);
+
+        }
+
 
         AddUserCommand = new DelegateCommand(AddNewEmployee)
             .ObservesCanExecute(() => IsEnabled);
