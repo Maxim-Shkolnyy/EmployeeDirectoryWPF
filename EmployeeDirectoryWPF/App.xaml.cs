@@ -10,7 +10,7 @@ namespace EmployeeDirectoryWPF;
 
 public partial class App : Application
 {
-    private EmployeeViewModel _viewModel;
+    private MainWindowViewModel _viewModel;
     private readonly MyDbContext _dbContext;
 
     public ObservableCollection<Employee> Employees { get; set; }

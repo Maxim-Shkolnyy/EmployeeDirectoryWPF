@@ -12,13 +12,13 @@ using System.Windows.Shell;
 
 namespace EmployeeDirectoryWPF.ViewModels;
 
-public class EmployeeViewModel : BindableBase
+public class MainWindowViewModel : BindableBase
 {
     private ObservableCollection<Employee> _employees;
     private Employee _selectedEmployee;
     private AddWindow _addUserWindow;
 
-    public EmployeeViewModel()
+    public MainWindowViewModel()
     {
         Employees = new ObservableCollection<Employee>();
         //AddCommand = new DelegateCommand(() => AddEmployee(new Employee()));

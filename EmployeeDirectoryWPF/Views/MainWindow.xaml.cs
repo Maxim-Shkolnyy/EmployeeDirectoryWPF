@@ -9,7 +9,7 @@ namespace EmployeeDirectoryWPF.ViewModels
 {
     public partial class MainWindow : Window
     {
-        private EmployeeViewModel _viewModel;
+        private MainWindowViewModel _viewModel;
         private AddWindow _addUserWindow;
         private EditWindow _editUserWindow;
         private Employee _selectedEmployee;
@@ -21,7 +21,7 @@ namespace EmployeeDirectoryWPF.ViewModels
         public MainWindow()
         {
             InitializeComponent();
-            _viewModel = new EmployeeViewModel();
+            _viewModel = new MainWindowViewModel();
             _viewModel.LoadEmployees();
             Employees = _viewModel.Employees;
             DataContext = this;

@@ -14,7 +14,7 @@ namespace EmployeeDirectoryWPF
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<EmployeeViewModel>().SingleInstance();
+            builder.RegisterType<MainWindowViewModel>().SingleInstance();
             builder.RegisterType<MyDbContext>().As<DbContext>().InstancePerLifetimeScope();
             builder.RegisterType<App>().AsSelf().SingleInstance();
         }
